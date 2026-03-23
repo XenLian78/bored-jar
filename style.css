@@ -1,11 +1,11 @@
 
 :root {
-    /* Τα χρώματα που ορίσαμε από το colors.JPG */
+    /* Χρώματα */
     --bg-main: #A3ABC0;       /* Background (a3abc0ff) */
     --white-card: #FFFFFF;    /* Κεντρικό πλαίσιο (ffffffff) */
     --dark-text: #1D2D50;     /* Dark Text (από το Dark Text block) */
     --brand-primary: #FEDB7F; /* Brand Light/Primary (fedb7fff) */
-    --brand-orange: #FF941A;  /* Το έντονο πορτοκαλί για έμφαση */
+    --brand-orange: #FF941A;  /* έντονο πορτοκαλί για έμφαση */
 }
 
 * {
@@ -15,7 +15,7 @@
 }
 
 body {
-    background-color: #2c2c2c; /* Σκούρο φόντο γύρω από το "κινητό" */
+    background-color: #2c2c2c; /* Σκούρο φόντο "background" */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,7 +23,7 @@ body {
     font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Το "σώμα" του κινητού */
+/* Λευκό πλαίσιο */
 .phone-container {
     background-color: var(--bg-main);
     width: 375px;
