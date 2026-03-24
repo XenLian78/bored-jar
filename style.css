@@ -55,7 +55,7 @@ body {
     width: 100%;
 }
 
-/* ΕΥΘΥΓΡΑΜΜΙΣΗ: Εδώ γίνεται η μαγεία για το κεντράρισμα */
+/* ΕΥΘΥΓΡΑΜΜΙΣΗ ΚΕΙΜΕΝΩΝ */
 .cat {
     display: flex;
     flex-direction: column; /* Εικόνα πάνω, κείμενο κάτω */
@@ -65,10 +65,10 @@ body {
 }
 
 .cat img {
-    width: 70px;            /* Σταθερό πλάτος για τα σύννεφα */
+    width: 70px; 
     height: auto;
     margin-bottom: 5px;
-    transition: transform 0.2s; /* Προετοιμασία για το hover effect */
+    transition: transform 0.2s; 
 }
 
 .cat p {
@@ -76,12 +76,12 @@ body {
     color: var(--dark-text);
     font-weight: 700;
     margin: 0;
-    width: 100%;           /* Διασφαλίζει ότι το κείμενο έχει χώρο να κεντραριστεί */
+    width: 100%;  
 }
 
-/* --- ΕΦΕ HOVER (Αυτό που ζήτησες) --- */
+/* --- ΕΦΕ HOVER --- */
 .cat:hover img {
-    transform: scale(1.15); /* Το σύννεφο μεγαλώνει λίγο όταν το ακουμπάς */
+    transform: scale(1.15); /* Μεγαλώνει λίγο όταν το ακουμπάς */
 }
 
 .cat:active img {
