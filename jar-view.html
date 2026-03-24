@@ -1,1 +1,59 @@
 
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <title>Bored Jar - Το Βάζο μου</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .idea-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+            width: 100%;
+        }
+        .idea-item input { margin-right: 15px; transform: scale(1.5); }
+        .disabled-text { color: #ccc; text-decoration: line-through; }
+    </style>
+</head>
+<body>
+    <div class="phone-container">
+        <div style="padding: 20px; text-align: left;">
+            <a href="add-idea.html" style="text-decoration: none; color: var(--dark-text); font-weight: bold;">< Πίσω</a>
+        </div>
+
+        <div class="main-card">
+            <h2 style="color: var(--dark-text); margin-bottom: 20px;">Το Βάζο σου</h2>
+            <p style="font-size: 14px; margin-bottom: 15px;">Επίλεξε τις δραστηριότητες που θέλεις:</p>
+            
+            <div id="jarList" style="width: 100%; overflow-y: auto; max-height: 400px; margin-bottom: 20px;">
+                <!-- Οι ιδέες θα εμφανιστούν εδώ δυναμικά -->
+            </div>
+
+            <button class="start-btn" onclick="window.location.href='game.html'">Έναρξη Παιχνιδιού</button>
+        </div>
+
+        <footer style="text-align: center; padding: 15px;">
+            <img src="assets/images/logo-bored-jar.svg" style="width: 80px;" alt="Bored Jar Logo">
+        </footer>
+    </div>
+
+    <script>
+        // Εδώ αργότερα θα διαβάζουμε τις πραγματικές ιδέες από το LocalStorage
+        const dummyIdeas = ["Γράψε το δικό σου σενάριο", "Μάθε 'Γεια' σε 5 γλώσσες", "Δες ένα ντοκιμαντέρ"];
+        const listDiv = document.getElementById('jarList');
+
+        dummyIdeas.forEach(idea => {
+            const div = document.createElement('div');
+            div.className = 'idea-item';
+            div.innerHTML = `
+                <input type="checkbox" checked onchange="this.nextSibling.classList.toggle('disabled-text')">
+                <span>${idea}</span>
+            `;
+            listDiv.appendChild(div);
+        });
+    </script>
+</body>
+</html>
