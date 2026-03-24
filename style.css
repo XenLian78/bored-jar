@@ -3,8 +3,8 @@
     --white-card: #FFFFFF;
     --dark-text: #1D2D50;
     --brand-primary: #FEDB7F;
-    --brand-orange: #FF941A;
-    --btn-gray: #A3ABC0; /* Το χρώμα από το Figma σου */
+    --brand-orange: #FF941A; /* Βεβαιώσου ότι υπάρχει αυτή η γραμμή */
+    --btn-gray: #A3ABC0;
 }
 
 * {
@@ -110,4 +110,8 @@ body {
 
 .start-btn:active {
     transform: translateY(0);
+}
+.btn-orange {
+    background-color: var(--brand-orange) !important;
+    color: white !important;
 }
