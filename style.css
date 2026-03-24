@@ -1,25 +1,10 @@
-.top-nav {
-    text-align: left;
-    padding: 30px 20px 10px 20px; /* Περισσότερος αέρας πάνω (30px) */
-}
-
-.top-nav a {
-    text-decoration: none;
-    color: var(--dark-text);
-    font-weight: bold;
-    font-size: 18px;
-    transition: opacity 0.2s;
-}
-
-.top-nav a:hover {
-    opacity: 0.7;
-}
+/* --- 1. ΜΕΤΑΒΛΗΤΕΣ ΚΑΙ ΒΑΣΙΚΕΣ ΡΥΘΜΙΣΕΙΣ --- */
 :root {
     --bg-main: #A3ABC0;
     --white-card: #FFFFFF;
     --dark-text: #1D2D50;
     --brand-primary: #FEDB7F;
-    --brand-orange: #FF941A; /* Βεβαιώσου ότι υπάρχει αυτή η γραμμή */
+    --brand-orange: #FF941A;
     --btn-gray: #A3ABC0;
 }
 
@@ -38,6 +23,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* --- 2. ΤΟ ΠΛΑΙΣΙΟ ΤΟΥ ΚΙΝΗΤΟΥ --- */
 .phone-container {
     background-color: var(--bg-main);
     width: 375px;
@@ -46,22 +32,38 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 0 20px 20px 20px; /* 0 πάνω γιατί έχουμε το top-nav */
     box-shadow: 0 25px 50px rgba(0,0,0,0.3);
     overflow: hidden;
+}
+
+/* --- 3. ΠΛΟΗΓΗΣΗ ΚΑΙ ΚΑΡΤΑ --- */
+.top-nav {
+    text-align: left;
+    padding: 30px 20px 10px 10px;
+}
+
+.top-nav a {
+    text-decoration: none;
+    color: var(--dark-text);
+    font-weight: bold;
+    font-size: 18px;
+    transition: opacity 0.2s;
 }
 
 .main-card {
     background: var(--white-card);
     border-radius: 30px;
-    margin-top: 20px;
     flex-grow: 1;
-    padding: 20px;
+    padding: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden; /* Κρατάει τα πάντα μέσα στις στρογγυλεμένες γωνίες */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
+/* --- 4. GRID ΚΑΤΗΓΟΡΙΩΝ (INDEX) --- */
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -70,7 +72,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* ΕΥΘΥΓΡΑΜΜΙΣΗ ΚΕΙΜΕΝΩΝ */
 .cat {
     display: flex;
     flex-direction: column; 
@@ -90,44 +91,82 @@ body {
     font-size: 11px;
     color: var(--dark-text);
     font-weight: 700;
-    margin: 0;
-    width: 100%;  
 }
 
-/* --- ΕΦΕ HOVER --- */
-.cat:hover img {
-    transform: scale(1.15);
-}
+.cat:hover img { transform: scale(1.1); }
 
-.cat:active img {
-    transform: scale(0.95);
-}
-
-/* --- ΤΟ ΚΟΥΜΠΙ ΞΕΚΙΝΑΜΕ --- */
+/* --- 5. ΚΟΥΜΠΙΑ --- */
 .start-btn {
     background-color: var(--btn-gray);
-    color: #FFFFFF;           /* Λευκό κείμενο */
+    color: #FFFFFF;
     border: none;
-    width: 100%;              /* Πιάνει όλο το πλάτος */
-    padding: 16px;            /* Ύψος κουμπιού */
+    width: 100%;
+    padding: 16px;
     font-size: 18px;
     font-weight: 600;
-    border-radius: 15px;      /* Στρογγυλεμένες γωνίες όπως το Sign Up */
+    border-radius: 15px;
     cursor: pointer;
-    margin-top: 10px;         /* Απόσταση από την από πάνω εικόνα */
-    transition: background-color 0.3s, transform 0.2s;
+    transition: all 0.3s;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    flex-shrink: 0; /* Εμποδίζει το κουμπί να "μαζέψει" σε ύψος */
 }
 
-.start-btn:hover {
-    background-color: #8E97AD; /* Λίγο πιο σκούρο στο hover */
-    transform: translateY(-2px);
-}
-
-.start-btn:active {
-    transform: translateY(0);
-}
 .btn-orange {
     background-color: var(--brand-orange) !important;
     color: white !important;
+}
+
+.start-btn:hover {
+    filter: brightness(0.9);
+    transform: translateY(-2px);
+}
+
+/* --- 6. ΛΙΣΤΑ ΙΔΕΩΝ (JAR VIEW) --- */
+.idea-list-container {
+    width: 100%;
+    text-align: left;
+    margin-top: 15px;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+    margin-bottom: 15px;
+}
+
+.idea-item {
+    display: flex;
+    align-items: center;
+    background: #f4f5f7;
+    margin-bottom: 8px;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.idea-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    accent-color: var(--brand-orange);
+}
+
+.disabled-idea {
+    opacity: 0.4;
+}
+
+.disabled-idea span {
+    text-decoration: line-through;
+}
+
+/* --- 7. ΕΙΚΟΝΕΣ ΧΑΡΑΚΤΗΡΩΝ ΚΑΙ FOOTER --- */
+.bottom-char-img {
+    max-height: 180px; /* Διόρθωση για να μην σπρώχνει το footer */
+    width: auto;
+    margin-top: auto;
+    display: block;
+    object-fit: contain;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    flex-shrink: 0;
 }
