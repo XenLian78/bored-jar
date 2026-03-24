@@ -1,11 +1,10 @@
 
 :root {
-    /* Χρώματα */
-    --bg-main: #A3ABC0;       /* Background (a3abc0ff) */
-    --white-card: #FFFFFF;    /* Κεντρικό πλαίσιο (ffffffff) */
-    --dark-text: #1D2D50;     /* Dark Text (από το Dark Text block) */
-    --brand-primary: #FEDB7F; /* Brand Light/Primary (fedb7fff) */
-    --brand-orange: #FF941A;  /* έντονο πορτοκαλί για έμφαση */
+    --bg-main: #A3ABC0;
+    --white-card: #FFFFFF;
+    --dark-text: #1D2D50;
+    --brand-primary: #FEDB7F;
+    --brand-orange: #FF941A;
 }
 
 * {
@@ -14,35 +13,15 @@
     padding: 0;
 }
 
-.cat {
-    display: flex;
-    flex-direction: column; /* Βάζει την εικόνα πάνω και το κείμενο κάτω */
-    align-items: center;    /* Κεντράρει οριζόντια (στο κέντρο του σύννεφου) */
-    text-align: center;     /* Κεντράρει το ίδιο το κείμενο */
-}
-
-.cat img {
-    width: 80%;            /* Ρυθμίζει το μέγεθος των σύννεφων για να μη "μπουκώνουν" */
-    margin-bottom: 5px;    /* Δίνει λίγο αέρα ανάμεσα στο σύννεφο και τη λέξη */
-}
-
-.cat p {
-    font-size: 11px;       /* Μικραίνουμε ελαφρώς τη γραμματοσειρά για να χωράνε οι μεγάλες λέξεις */
-    font-weight: 600;
-    color: var(--dark-text);
-    margin: 0;
-}
-
 body {
-    background-color: #2c2c2c; /* Σκούρο φόντο "background" */
+    background-color: #2c2c2c;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Λευκό πλαίσιο */
 .phone-container {
     background-color: var(--bg-main);
     width: 375px;
@@ -54,4 +33,57 @@ body {
     padding: 20px;
     box-shadow: 0 25px 50px rgba(0,0,0,0.3);
     overflow: hidden;
+}
+
+/* Η λευκή κάρτα */
+.main-card {
+    background: var(--white-card);
+    border-radius: 30px;
+    margin-top: 20px;
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Το πλέγμα (Grid) για τα 6 εικονίδια */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    width: 100%;
+}
+
+/* ΕΥΘΥΓΡΑΜΜΙΣΗ: Εδώ γίνεται η μαγεία για το κεντράρισμα */
+.cat {
+    display: flex;
+    flex-direction: column; /* Εικόνα πάνω, κείμενο κάτω */
+    align-items: center;    /* Κεντράρισμα στον οριζόντιο άξονα */
+    justify-content: center;
+    text-align: center;
+}
+
+.cat img {
+    width: 70px;            /* Σταθερό πλάτος για τα σύννεφα */
+    height: auto;
+    margin-bottom: 5px;
+    transition: transform 0.2s; /* Προετοιμασία για το hover effect */
+}
+
+.cat p {
+    font-size: 11px;
+    color: var(--dark-text);
+    font-weight: 700;
+    margin: 0;
+    width: 100%;           /* Διασφαλίζει ότι το κείμενο έχει χώρο να κεντραριστεί */
+}
+
+/* --- ΕΦΕ HOVER (Αυτό που ζήτησες) --- */
+.cat:hover img {
+    transform: scale(1.15); /* Το σύννεφο μεγαλώνει λίγο όταν το ακουμπάς */
+}
+
+.cat:active img {
+    transform: scale(0.95); /* Μικραίνει λίγο όταν το πατάς (click effect) */
 }
