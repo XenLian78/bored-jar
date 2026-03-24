@@ -8,38 +8,38 @@
 <body>
 
     <div class="phone-container">
-        <!-- Επάνω μέρος με Πίσω στα Αριστερά -->
-        <div class="top-nav">
+        
+<div class="top-nav">
             <a href="index.html">< Πίσω</a>
         </div>
 
-        <div class="main-card" style="text-align: center;">
+        
+<div class="main-card" style="text-align: center; margin-bottom: 20px;">
             <h2 style="color: var(--dark-text); font-size: 20px; margin-bottom: 10px; text-transform: uppercase;">
                 ΓΡΑΨΕ ΜΙΑ ΙΔΕΑ ΚΑΙ<br>ΤΟΠΟΘΕΤΗΣΕ ΤΗΝ ΣΤΟ ΒΑΖΟ
             </h2>
             <p style="color: #666; font-size: 14px; margin-bottom: 25px;">Επανέλαβε για περισσότερες ιδέες</p>
 
-            <!-- Πεδίο Κειμένου -->
-            <input type="text" id="ideaInput" placeholder="Γράψε μια ιδέα..." 
+            
+<input type="text" id="ideaInput" placeholder="Γράψε μια ιδέα..." 
                    style="width: 100%; padding: 15px; border: 2px solid #E0E0E0; border-radius: 15px; margin-bottom: 20px; font-size: 16px;">
 
-            <!-- Κουμπί Προσθήκης -->
-            <button class="start-btn" id="addBtn" style="margin-top: 0;">Βάλε την ιδέα στο βάζο</button>
+            
+<button class="start-btn" id="addBtn" style="margin-top: 0;">Βάλε την ιδέα στο βάζο</button>
 
-            <!-- Πορτοκαλί Κουμπί Προβολής Βάζου -->
-            <button class="start-btn btn-orange" 
+            
+<button class="start-btn btn-orange" 
                     onclick="window.location.href='jar-view.html'" 
                     style="margin-top: 15px;">
                 Δες το βάζο σου
             </button>
 
-            <!-- Εικόνα Χαρακτήρα -->
-            <div style="margin-top: auto; width: 100%;">
-                <img src="assets/images/idea-man.png" style="width: 100%; display: block;">
-            </div>
+            
+<img src="assets/images/idea-man.png" class="bottom-char-img" alt="Idea Character">
         </div>
 
-        <footer style="text-align: center; padding: 15px;">
+        
+<footer style="text-align: center; padding: 10px 15px 25px 15px; margin-top: auto;">
             <img src="assets/images/logo-bored-jar.svg" style="width: 80px;" alt="Bored Jar Logo">
         </footer>
     </div>
@@ -52,17 +52,12 @@
             const newIdea = input.value.trim();
             
             if (newIdea !== "") {
-                // 1. Παίρνουμε τις παλιές ιδέες από τη μνήμη (αν υπάρχουν)
                 let savedIdeas = JSON.parse(localStorage.getItem('myIdeas')) || [];
-                
-                // 2. Προσθέτουμε τη νέα ιδέα
                 savedIdeas.push(newIdea);
-                
-                // 3. Τις ξανασώζουμε στη μνήμη
                 localStorage.setItem('myIdeas', JSON.stringify(savedIdeas));
                 
                 alert("Η ιδέα '" + newIdea + "' μπήκε στο βάζο!");
-                input.value = ""; // Καθαρισμός πεδίου
+                input.value = "";
             } else {
                 alert("Γράψε κάτι πρώτα!");
             }
