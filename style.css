@@ -1,3 +1,19 @@
+.top-nav {
+    text-align: left;
+    padding: 30px 20px 10px 20px; /* Περισσότερος αέρας πάνω (30px) */
+}
+
+.top-nav a {
+    text-decoration: none;
+    color: var(--dark-text);
+    font-weight: bold;
+    font-size: 18px;
+    transition: opacity 0.2s;
+}
+
+.top-nav a:hover {
+    opacity: 0.7;
+}
 :root {
     --bg-main: #A3ABC0;
     --white-card: #FFFFFF;
