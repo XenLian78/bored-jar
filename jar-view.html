@@ -1,38 +1,25 @@
-
 <!DOCTYPE html>
 <html lang="el">
 <head>
     <meta charset="UTF-8">
     <title>Bored Jar - Το Βάζο μου</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .idea-item {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            text-align: left;
-            width: 100%;
-        }
-        .idea-item input { margin-right: 15px; transform: scale(1.5); }
-        .disabled-text { color: #ccc; text-decoration: line-through; }
-    </style>
 </head>
 <body>
+
     <div class="phone-container">
-        <div style="padding: 20px; text-align: left;">
-            <a href="add-idea.html" style="text-decoration: none; color: var(--dark-text); font-weight: bold;">< Πίσω</a>
+        <div class="top-nav">
+            <a href="add-idea.html">< Πίσω</a>
         </div>
 
         <div class="main-card">
-            <h2 style="color: var(--dark-text); margin-bottom: 20px;">Το Βάζο σου</h2>
-            <p style="font-size: 14px; margin-bottom: 15px;">Επίλεξε τις δραστηριότητες που θέλεις:</p>
-            
-            <div id="jarList" style="width: 100%; overflow-y: auto; max-height: 400px; margin-bottom: 20px;">
-                <!-- Οι ιδέες θα εμφανιστούν εδώ δυναμικά -->
-            </div>
+            <h2 style="color: var(--dark-text); font-size: 22px; margin-bottom: 5px;">ΤΟ ΒΑΖΟ ΣΟΥ</h2>
+            <p style="color: #666; font-size: 14px; margin-bottom: 10px;">Διαχείριση ιδεών:</p>
 
-            <button class="start-btn" onclick="window.location.href='game.html'">Έναρξη Παιχνιδιού</button>
+            <div id="jarList" class="idea-list-container">
+                </div>
+
+            <button class="start-btn" onclick="window.location.href='random-draw.html'">ΕΝΑΡΞΗ ΠΑΙΧΝΙΔΙΟΥ</button>
         </div>
 
         <footer style="text-align: center; padding: 15px;">
@@ -41,33 +28,43 @@
     </div>
 
     <script>
-    const jarList = document.getElementById('jarList');
-    
-    // Φορτώνουμε τις πραγματικές ιδέες που αποθήκευσε ο χρήστης στο add-idea.html
-    // Το LocalStorage φροντίζει να μένουν εκεί "για πάντα" στη συγκεκριμένη συσκευή/browser
-    let savedIdeas = JSON.parse(localStorage.getItem('myIdeas')) || [];
+        const jarList = document.getElementById('jarList');
+        
+        // Φόρτωση από το LocalStorage
+        let savedIdeas = JSON.parse(localStorage.getItem('myIdeas')) || [];
 
-    function displayIdeas() {
-        jarList.innerHTML = ""; // Καθαρίζουμε τη λίστα πριν την εμφάνιση
+        function displayIdeas() {
+            jarList.innerHTML = ""; 
 
-        if (savedIdeas.length === 0) {
-            jarList.innerHTML = `
-                <p style='text-align:center; color:#999; margin-top:20px;'>
-                    Το βάζο είναι άδειο!<br>Πήγαινε πίσω και πρόσθεσε την πρώτη σου ιδέα.
-                </p>`;
-        } else {
-            savedIdeas.forEach((idea, index) => {
-                const item = document.createElement('div');
-                item.className = 'idea-item';
-                item.innerHTML = `
-                    <input type="checkbox" checked onchange="this.parentElement.classList.toggle('disabled-idea')">
-                    <span class="idea-text">${idea}</span>
-                `;
-                jarList.appendChild(item);
-            });
+            if (savedIdeas.length === 0) {
+                jarList.innerHTML = "<p style='text-align:center; color:#999; margin-top:20px;'>Το βάζο είναι άδειο!</p>";
+            } else {
+                savedIdeas.forEach((idea, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'idea-item';
+                    item.innerHTML = `
+                        <input type="checkbox" checked onchange="this.parentElement.classList.toggle('disabled-idea')">
+                        <span class="idea-text">${idea}</span>
+                        <span class="delete-btn" onclick="deleteIdea(${index})">×</span>
+                    `;
+                    jarList.appendChild(item);
+                });
+            }
         }
-    }
 
-    // Εκτέλεση της εμφάνισης μόλις φορτώσει η σελίδα
-    displayIdeas();
-</script>
+        // Λειτουργία οριστικής διαγραφής
+        function deleteIdea(index) {
+            if (confirm("Θέλεις σίγουρα να διαγράψεις αυτή την ιδέα;")) {
+                // Αφαίρεση από τον πίνακα
+                savedIdeas.splice(index, 1);
+                // Ενημέρωση της μνήμης (LocalStorage)
+                localStorage.setItem('myIdeas', JSON.stringify(savedIdeas));
+                // Επανασχεδιασμός της λίστας
+                displayIdeas();
+            }
+        }
+
+        displayIdeas();
+    </script>
+</body>
+</html>
