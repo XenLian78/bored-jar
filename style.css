@@ -1,10 +1,10 @@
-
 :root {
     --bg-main: #A3ABC0;
     --white-card: #FFFFFF;
     --dark-text: #1D2D50;
     --brand-primary: #FEDB7F;
     --brand-orange: #FF941A;
+    --btn-gray: #A3ABC0; /* Το χρώμα από το Figma σου */
 }
 
 * {
@@ -35,7 +35,6 @@ body {
     overflow: hidden;
 }
 
-/* Η λευκή κάρτα */
 .main-card {
     background: var(--white-card);
     border-radius: 30px;
@@ -47,19 +46,19 @@ body {
     align-items: center;
 }
 
-/* Το πλέγμα (Grid) για τα 6 εικονίδια */
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 /* ΕΥΘΥΓΡΑΜΜΙΣΗ ΚΕΙΜΕΝΩΝ */
 .cat {
     display: flex;
-    flex-direction: column; /* Εικόνα πάνω, κείμενο κάτω */
-    align-items: center;    /* Κεντράρισμα στον οριζόντιο άξονα */
+    flex-direction: column; 
+    align-items: center;    
     justify-content: center;
     text-align: center;
 }
@@ -81,9 +80,34 @@ body {
 
 /* --- ΕΦΕ HOVER --- */
 .cat:hover img {
-    transform: scale(1.15); /* Μεγαλώνει λίγο όταν το ακουμπάς */
+    transform: scale(1.15);
 }
 
 .cat:active img {
-    transform: scale(0.95); /* Μικραίνει λίγο όταν το πατάς (click effect) */
+    transform: scale(0.95);
+}
+
+/* --- ΤΟ ΚΟΥΜΠΙ ΞΕΚΙΝΑΜΕ --- */
+.start-btn {
+    background-color: var(--btn-gray);
+    color: #FFFFFF;           /* Λευκό κείμενο */
+    border: none;
+    width: 100%;              /* Πιάνει όλο το πλάτος */
+    padding: 16px;            /* Ύψος κουμπιού */
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 15px;      /* Στρογγυλεμένες γωνίες όπως το Sign Up */
+    cursor: pointer;
+    margin-top: 10px;         /* Απόσταση από την από πάνω εικόνα */
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.start-btn:hover {
+    background-color: #8E97AD; /* Λίγο πιο σκούρο στο hover */
+    transform: translateY(-2px);
+}
+
+.start-btn:active {
+    transform: translateY(0);
 }
