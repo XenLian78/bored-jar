@@ -161,3 +161,17 @@ body {
 .disabled-idea .idea-text {
     text-decoration: line-through;
 }
+/* Κουμπί διαγραφής (X) */
+.delete-btn {
+    margin-left: auto; /* Σπρώχνει το X τέρμα δεξιά */
+    color: #ff4d4d;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 18px;
+    transition: transform 0.2s;
+}
+
+.delete-btn:hover {
+    transform: scale(1.2);
+}
