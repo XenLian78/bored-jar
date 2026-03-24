@@ -41,19 +41,33 @@
     </div>
 
     <script>
-        // Εδώ αργότερα θα διαβάζουμε τις πραγματικές ιδέες από το LocalStorage
-        const dummyIdeas = ["Γράψε το δικό σου σενάριο", "Μάθε 'Γεια' σε 5 γλώσσες", "Δες ένα ντοκιμαντέρ"];
-        const listDiv = document.getElementById('jarList');
+    const jarList = document.getElementById('jarList');
+    
+    // Φορτώνουμε τις πραγματικές ιδέες που αποθήκευσε ο χρήστης στο add-idea.html
+    // Το LocalStorage φροντίζει να μένουν εκεί "για πάντα" στη συγκεκριμένη συσκευή/browser
+    let savedIdeas = JSON.parse(localStorage.getItem('myIdeas')) || [];
 
-        dummyIdeas.forEach(idea => {
-            const div = document.createElement('div');
-            div.className = 'idea-item';
-            div.innerHTML = `
-                <input type="checkbox" checked onchange="this.nextSibling.classList.toggle('disabled-text')">
-                <span>${idea}</span>
-            `;
-            listDiv.appendChild(div);
-        });
-    </script>
-</body>
-</html>
+    function displayIdeas() {
+        jarList.innerHTML = ""; // Καθαρίζουμε τη λίστα πριν την εμφάνιση
+
+        if (savedIdeas.length === 0) {
+            jarList.innerHTML = `
+                <p style='text-align:center; color:#999; margin-top:20px;'>
+                    Το βάζο είναι άδειο!<br>Πήγαινε πίσω και πρόσθεσε την πρώτη σου ιδέα.
+                </p>`;
+        } else {
+            savedIdeas.forEach((idea, index) => {
+                const item = document.createElement('div');
+                item.className = 'idea-item';
+                item.innerHTML = `
+                    <input type="checkbox" checked onchange="this.parentElement.classList.toggle('disabled-idea')">
+                    <span class="idea-text">${idea}</span>
+                `;
+                jarList.appendChild(item);
+            });
+        }
+    }
+
+    // Εκτέλεση της εμφάνισης μόλις φορτώσει η σελίδα
+    displayIdeas();
+</script>
