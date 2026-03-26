@@ -5,30 +5,22 @@
     <title>Bored Jar - Κλήρωση!</title>
     <link rel="stylesheet" href="style.css">
     <style>
-    .draw-area {
-        position: relative;
-        width: 100%;
-        flex-grow: 1; /* Παίρνει τον διαθέσιμο χώρο για να μην σπρώχνει το footer */
-        display: flex;
-        justify-content: center;
-        align-items: center; /* Κεντράρισμα του βάζου */
-    }
-    .jar-wrapper { 
-        position: relative; 
-        width: 200px; /* Σταθερό πλάτος για να ευθυγραμμιστούν */
-    }
-    #jarBody { 
-        width: 100%; 
-        display: block; 
-    }
-    #jarLid {
-        position: absolute;
-        width: 105%; /* Λίγο μεγαλύτερο από το σώμα για να "κουμπώνει" */
-        top: -15px; /* Ρύθμισέ το ώστε να ακουμπάει ακριβώς το jar-body */
-        left: -2.5%; /* Κεντράρισμα λόγω του 105% */
-        z-index: 2;
-    }
-</style>
+        .draw-area {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 20px;
+        }
+        .jar-wrapper { position: relative; width: 180px; }
+        #jarLid {
+            position: absolute;
+            top: -40px; left: 0; width: 100%; z-index: 2;
+            transition: all 0.3s;
+        }
+        #jarBody { width: 100%; display: block; position: relative; z-index: 1; }
         
         #cloudContainer {
             position: absolute;
@@ -76,13 +68,10 @@
                 <button class="start-btn btn-orange" onclick="drawIdea()">ΔΙΑΛΕΞΕ ΓΙΑ ΜΕΝΑ</button>
             </div>
             
-            <div id="resultButtons" style="width: 100%; display: none; flex-direction: column; gap: 12px;">
-            <button class="start-btn" onclick="doneIdea()" style="background-color: #28a745; margin-top: 0;">
-                ΤΟ ΕΚΑΝΑ!
-            </button>
-            <button class="start-btn" onclick="location.reload()" style="background-color: var(--btn-gray); margin-top: 0;">
-                ΑΛΛΟ ΕΝΑ...
-            </button>
+            <div id="resultButtons" style="width: 100%; display: none; gap: 10px;">
+                <button class="start-btn" onclick="doneIdea()" style="background-color: #28a745;">ΤΟ ΕΚΑΝΑ!</button>
+                <button class="start-btn" onclick="location.reload()" style="background-color: var(--btn-gray);">ΑΛΛΟ ΕΝΑ...</button>
+            </div>
         </div>
 
         <footer style="text-align: center; padding: 15px;">
