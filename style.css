@@ -3,9 +3,9 @@
     --bg-main: #A3ABC0;
     --white-card: #FFFFFF;
     --dark-text: #1D2D50;
-    --brand-primary: #FEDB7F;
     --brand-orange: #FF941A;
     --btn-gray: #A3ABC0;
+    --input-border: #E0E0E0;
 }
 
 * {
@@ -32,25 +32,29 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 0 20px 20px 20px; /* 0 πάνω γιατί έχουμε το top-nav */
+    padding: 0 20px 20px 20px;
     box-shadow: 0 25px 50px rgba(0,0,0,0.3);
     overflow: hidden;
 }
 
-/* --- 3. ΠΛΟΗΓΗΣΗ ΚΑΙ ΚΑΡΤΑ --- */
+/* --- 3. ΠΛΟΗΓΗΣΗ --- */
 .top-nav {
-    text-align: left;
-    padding: 30px 20px 10px 10px;
+    padding: 30px 10px 10px 10px;
+}
+
+.nav-right {
+    text-align: right; /* Σπρώχνει το "Παράλειψη" δεξιά */
 }
 
 .top-nav a {
     text-decoration: none;
     color: var(--dark-text);
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     transition: opacity 0.2s;
 }
 
+/* --- 4. Η ΚΑΡΤΑ --- */
 .main-card {
     background: var(--white-card);
     border-radius: 30px;
@@ -59,11 +63,87 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: hidden; /* Κρατάει τα πάντα μέσα στις στρογγυλεμένες γωνίες */
+    overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    position: relative;
 }
 
-/* --- 4. GRID ΚΑΤΗΓΟΡΙΩΝ (INDEX) --- */
+.add-idea-card {
+    text-align: center;
+}
+
+.card-title {
+    color: var(--dark-text);
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.card-subtitle {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+/* --- 5. ΦΟΡΜΕΣ ΚΑΙ ΚΟΥΜΠΙΑ --- */
+.custom-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid var(--input-border);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    outline: none;
+}
+
+.start-btn {
+    background-color: var(--btn-gray);
+    color: #FFFFFF;
+    border: none;
+    width: 100%;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+.btn-orange {
+    background-color: var(--brand-orange) !important;
+    margin-top: 15px;
+}
+
+.start-btn:hover {
+    filter: brightness(0.9);
+    transform: translateY(-2px);
+}
+
+/* --- 6. Ο ΧΑΡΑΚΤΗΡΑΣ (ΠΕΡΙΟΡΙΣΜΟΣ ΕΝΤΟΣ ΚΑΡΤΑΣ) --- */
+.bottom-char-img {
+    max-width: 55%; /* Μίκρυνε για να χωράει άνετα */
+    max-height: 130px;
+    width: auto;
+    margin: auto auto -10px auto; /* Το κρατάμε μέσα στο λευκό */
+    display: block;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* --- 7. FOOTER --- */
+.app-footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+}
+
+.footer-logo {
+    width: 80px;
+}
+
+/* --- 8. ΕΠΙΠΛΕΟΝ ΣΤΟΙΧΕΙΑ (GRID & LIST) --- */
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -80,55 +160,15 @@ body {
     text-align: center;
 }
 
-.cat img {
-    width: 70px; 
-    height: auto;
-    margin-bottom: 5px;
-    transition: transform 0.2s; 
-}
+.cat img { width: 70px; height: auto; margin-bottom: 5px; }
+.cat p { font-size: 11px; color: var(--dark-text); font-weight: 700; }
 
-.cat p {
-    font-size: 11px;
-    color: var(--dark-text);
-    font-weight: 700;
-}
-
-.cat:hover img { transform: scale(1.1); }
-
-/* --- 5. ΚΟΥΜΠΙΑ --- */
-.start-btn {
-    background-color: var(--btn-gray);
-    color: #FFFFFF;
-    border: none;
-    width: 100%;
-    padding: 16px;
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    flex-shrink: 0; /* Εμποδίζει το κουμπί να "μαζέψει" σε ύψος */
-}
-
-.btn-orange {
-    background-color: var(--brand-orange) !important;
-    color: white !important;
-}
-
-.start-btn:hover {
-    filter: brightness(0.9);
-    transform: translateY(-2px);
-}
-
-/* --- 6. ΛΙΣΤΑ ΙΔΕΩΝ (JAR VIEW) --- */
 .idea-list-container {
     width: 100%;
     text-align: left;
     margin-top: 15px;
     flex-grow: 1;
     overflow-y: auto;
-    padding-right: 5px;
     margin-bottom: 15px;
 }
 
@@ -137,52 +177,23 @@ body {
     align-items: center;
     background: #f4f5f7;
     margin-bottom: 8px;
-    padding: 10px 12px; /* Λίγο πιο compact */
+    padding: 10px 12px;
     border-radius: 12px;
 }
 
-.idea-item input[type="checkbox"] {
-    width: 18px;             /* Μικρότερο μέγεθος */
-    height: 18px;
-    margin-right: 12px;
-    accent-color: #28a745;   /* Κλασικό πράσινο χρώμα */
-    cursor: pointer;
-}
-
-.idea-text {
-    font-size: 15px;         /* Πιο κομψό κείμενο */
-    color: var(--dark-text);
-}
-
-.disabled-idea {
-    opacity: 0.4;
-}
-
-.disabled-idea .idea-text {
-    text-decoration: line-through;
-}
-/* Κουμπί διαγραφής (X) */
 .delete-btn {
-    margin-left: auto; /* Σπρώχνει το X τέρμα δεξιά */
+    margin-left: auto;
     color: #ff4d4d;
     font-weight: bold;
     cursor: pointer;
-    padding: 5px 10px;
     font-size: 18px;
-    transition: transform 0.2s;
 }
 
-.delete-btn:hover {
-    transform: scale(1.2);
-}
-
-/* --- 7. ANIMATIONS ΚΛΗΡΩΣΗΣ --- */
+/* --- 9. ANIMATIONS ΚΛΗΡΩΣΗΣ --- */
 @keyframes shake {
     0% { transform: translate(1px, 1px) rotate(0deg); }
     20% { transform: translate(-3px, 0px) rotate(-1deg); }
     40% { transform: translate(3px, 2px) rotate(1deg); }
-    60% { transform: translate(-3px, 1px) rotate(-1deg); }
-    80% { transform: translate(3px, 1px) rotate(1deg); }
     100% { transform: translate(1px, -2px) rotate(0deg); }
 }
 
@@ -193,21 +204,9 @@ body {
 
 @keyframes cloudShow {
     0% { transform: scale(0); opacity: 0; }
-    70% { transform: scale(1.1); opacity: 1; }
     100% { transform: scale(1); opacity: 1; }
 }
 
 .shaking { animation: shake 0.5s infinite; }
 .lid-off { animation: lidPop 0.6s forwards; }
 .cloud-active { animation: cloudShow 0.5s forwards; display: flex !important; }
-
-/* Περιορισμός του χαρακτήρα στην οθόνη add-idea */
-.bottom-char-img {
-    max-width: 65%;
-    max-height: 140px;
-    width: auto;
-    margin: auto auto -25px auto;
-    display: block;
-    object-fit: contain;
-    flex-shrink: 0;
-}
