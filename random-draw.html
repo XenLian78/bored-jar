@@ -5,30 +5,22 @@
     <title>Bored Jar - Κλήρωση!</title>
     <link rel="stylesheet" href="style.css">
     <style>
-    .draw-area {
-        position: relative;
-        width: 100%;
-        flex-grow: 1; /* Παίρνει τον διαθέσιμο χώρο για να μην σπρώχνει το footer */
-        display: flex;
-        justify-content: center;
-        align-items: center; /* Κεντράρισμα του βάζου */
-    }
-        .jar-wrapper { 
-            position: relative; 
-            width: 200px; /* Σταθερό πλάτος για να ευθυγραμμιστούν */
+        .draw-area {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 20px;
         }
-        #jarBody { 
-            width: 100%; 
-            display: block; 
-        }
+        .jar-wrapper { position: relative; width: 180px; }
         #jarLid {
             position: absolute;
-            width: 105%; /* Λίγο μεγαλύτερο από το σώμα για να "κουμπώνει" */
-            top: -15px; /* Ρύθμισέ το ώστε να ακουμπάει ακριβώς το jar-body */
-            left: -2.5%; /* Κεντράρισμα λόγω του 105% */
-            z-index: 2;
+            top: -40px; left: 0; width: 100%; z-index: 2;
+            transition: all 0.3s;
         }
-    </style>
+        #jarBody { width: 100%; display: block; position: relative; z-index: 1; }
         
         #cloudContainer {
             position: absolute;
