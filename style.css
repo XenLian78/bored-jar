@@ -2,7 +2,7 @@
 :root {
     --bg-main: #A3ABC0;
     --white-card: #FFFFFF;
-    --dark-text: #1D2D50;
+    --dark-text: #1D2D50; /* Το σκούρο μπλε χρώμα */
     --brand-orange: #FF941A;
     --btn-gray: #A3ABC0;
     --input-border: #E0E0E0;
@@ -40,8 +40,6 @@ body {
 /* --- 3. ΠΛΟΗΓΗΣΗ & HEADER --- */
 .app-header-main {
     text-align: center;
-    margin-top: 35px;
-    margin-bottom: 10px;
 }
 
 .main-title {
@@ -52,10 +50,6 @@ body {
 
 .top-nav {
     padding: 30px 10px 10px 10px;
-}
-
-.nav-right {
-    text-align: right;
 }
 
 .top-nav a {
@@ -69,7 +63,6 @@ body {
 .main-card {
     background: var(--white-card);
     border-radius: 30px;
-    flex-grow: 1;
     padding: 25px;
     display: flex;
     flex-direction: column;
@@ -77,6 +70,7 @@ body {
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     position: relative;
+    /* Σημείωση: Το flex-grow: 1 μπήκε inline στην HTML για σιγουριά */
 }
 
 /* --- 5. ΚΟΥΜΠΙΑ --- */
@@ -95,17 +89,12 @@ body {
     text-transform: uppercase;
 }
 
-/* Διόρθωση: Σπρώχνει το κουμπί στο κάτω μέρος της κάρτας */
+/* Διόρθωση 3: Σπρώχνει το κουμπί στο κάτω μέρος */
 .btn-bottom {
     margin-top: auto; 
 }
 
-.btn-orange {
-    background-color: var(--brand-orange) !important;
-    margin-top: 12px;
-}
-
-/* --- 6. INDEX ΣΤΟΙΧΕΙΑ --- */
+/* --- 6. INDEX ΣΤΟΙΧΕΙΑ (GRID & HERO) --- */
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -122,11 +111,12 @@ body {
 }
 
 .cat img { width: 65px; height: auto; margin-bottom: 5px; }
-.cat p { font-size: 11px; color: var(--dark-text); font-weight: 700; }
 
-.hero-image-container {
-    width: 100%;
-    margin-top: 10px;
+/* Διόρθωση 2: Χρώμα σκούρο μπλε και Bold στα κείμενα του grid */
+.cat p { 
+    font-size: 11px; 
+    color: var(--dark-text); /* Ίδιο χρώμα με τον τίτλο */
+    font-weight: 800;        /* Bold */
 }
 
 .hero-img {
@@ -135,14 +125,6 @@ body {
 }
 
 /* --- 7. ADD IDEA ΣΤΟΙΧΕΙΑ --- */
-.card-title {
-    color: var(--dark-text);
-    font-size: 19px;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    text-align: center;
-}
-
 .custom-input {
     width: 100%;
     padding: 14px;
@@ -151,15 +133,6 @@ body {
     margin-bottom: 15px;
     font-size: 16px;
     outline: none;
-}
-
-.bottom-char-img {
-    max-width: 50%;
-    max-height: 120px;
-    width: auto;
-    margin: 20px auto 0 auto;
-    display: block;
-    object-fit: contain;
 }
 
 /* --- 8. FOOTER --- */
@@ -171,11 +144,3 @@ body {
 .footer-logo {
     width: 80px;
 }
-
-/* --- 9. ANIMATIONS --- */
-@keyframes shake {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    50% { transform: translate(-2px, -1px) rotate(-1deg); }
-    100% { transform: translate(0px, 0px) rotate(0deg); }
-}
-.shaking { animation: shake 0.5s infinite; }
