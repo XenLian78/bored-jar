@@ -5,43 +5,83 @@
     <title>Bored Jar - Κλήρωση!</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Διόρθωση μεγεθών για να μην "εκρήγνυται" το βάζο */
         .draw-area {
             position: relative;
             width: 100%;
-            height: 350px;
+            flex-grow: 1; 
             display: flex;
             justify-content: center;
-            align-items: flex-end;
-            margin-bottom: 20px;
+            align-items: center;
+            min-height: 320px;
+            margin-top: 20px;
         }
-        .jar-wrapper { position: relative; width: 180px; }
+
+        .jar-wrapper { 
+            position: relative; 
+            width: 180px; /* Σταθερό πλάτος */
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #jarBody { 
+            width: 100%; 
+            height: auto;
+            display: block; 
+            position: absolute;
+            bottom: 0;
+            z-index: 1;
+        }
+
         #jarLid {
             position: absolute;
-            top: -40px; left: 0; width: 100%; z-index: 2;
-            transition: all 0.3s;
+            width: 102%; 
+            top: 25px; /* Προσαρμογή για να "κουμπώσει" στο σώμα */
+            left: -1%; 
+            z-index: 2;
+            height: auto;
+            transition: transform 0.3s ease-out;
         }
-        #jarBody { width: 100%; display: block; position: relative; z-index: 1; }
         
+        /* Το συννεφάκι */
         #cloudContainer {
             position: absolute;
-            top: -60px;
-            width: 280px;
-            height: 200px;
-            display: none; /* Κρυφό αρχικά */
+            top: -40px;
+            width: 300px;
+            height: auto;
+            display: none; 
             justify-content: center;
             align-items: center;
-            z-index: 3;
+            z-index: 10;
         }
-        #cloudImg { width: 100%; position: absolute; }
+
+        #cloudImg { width: 100%; }
+
         #selectedIdea {
-            position: relative;
-            z-index: 4;
-            padding: 20px;
+            position: absolute;
+            z-index: 11;
+            padding: 30px;
             font-weight: bold;
-            color: var(--dark-text);
+            color: #1D2D50;
             font-size: 18px;
             text-align: center;
-            max-width: 80%;
+            width: 85%;
+        }
+
+        /* Animations */
+        .shaking { animation: shake 0.5s infinite; }
+        .lid-off { transform: translateY(-150px) rotate(25deg) !important; opacity: 0; }
+        .cloud-active { display: flex !important; animation: cloudShow 0.5s forwards; }
+
+        @keyframes cloudShow {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .main-card {
+            padding-bottom: 20px;
         }
     </style>
 </head>
@@ -51,11 +91,11 @@
             <a href="jar-view.html">< Πίσω</a>
         </div>
 
-        <div class="main-card" style="justify-content: center;">
+        <div class="main-card">
             <div class="draw-area">
                 <div id="cloudContainer">
                     <img src="assets/images/cloud-bubble.png" id="cloudImg">
-                    <div id="selectedIdea">Εδώ θα μπει η ιδέα!</div>
+                    <div id="selectedIdea"></div>
                 </div>
 
                 <div class="jar-wrapper" id="fullJar">
@@ -64,17 +104,14 @@
                 </div>
             </div>
 
-            <div id="actionButtons" style="width: 100%;">
+            <div id="actionButtons" style="width: 100%; padding: 0 10px;">
                 <button class="start-btn btn-orange" onclick="drawIdea()">ΔΙΑΛΕΞΕ ΓΙΑ ΜΕΝΑ</button>
             </div>
             
-            <div id="resultButtons" style="width: 100%; display: none; flex-direction: column; gap: 12px;">
-            <button class="start-btn" onclick="doneIdea()" style="background-color: #28a745; margin-top: 0;">
-                ΤΟ ΕΚΑΝΑ!
-            </button>
-            <button class="start-btn" onclick="location.reload()" style="background-color: var(--btn-gray); margin-top: 0;">
-                ΑΛΛΟ ΕΝΑ...
-            </button>
+            <div id="resultButtons" style="width: 100%; display: none; flex-direction: column; gap: 12px; padding: 0 10px;">
+                <button class="start-btn" onclick="doneIdea()" style="background-color: #28a745; margin-top: 0;">ΤΟ ΕΚΑΝΑ!</button>
+                <button class="start-btn" onclick="location.reload()" style="background-color: var(--btn-gray); margin-top: 0;">ΑΛΛΟ ΕΝΑ...</button>
+            </div>
         </div>
 
         <footer style="text-align: center; padding: 15px;">
@@ -86,12 +123,8 @@
         let currentIdeaIndex = -1;
         let savedIdeas = JSON.parse(localStorage.getItem('myIdeas')) || [];
         
-        // Φιλτράρουμε μόνο όσες ΔΕΝ είναι disabled (αν είχαμε σώσει το status)
-        // Για τώρα, ας πάρουμε όλες, αλλά μπορούμε να το εξελίξουμε
-        let availableIdeas = [...savedIdeas]; 
-
         function drawIdea() {
-            if (availableIdeas.length === 0) {
+            if (savedIdeas.length === 0) {
                 alert("Το βάζο είναι άδειο!");
                 return;
             }
@@ -101,36 +134,31 @@
             const cloud = document.getElementById('cloudContainer');
             const ideaText = document.getElementById('selectedIdea');
 
-            // 1. Ξεκινάει το κούνημα
             jar.classList.add('shaking');
             
             setTimeout(() => {
-                // 2. Σταματάει το κούνημα, πετάγεται το καπάκι
                 jar.classList.remove('shaking');
                 lid.classList.add('lid-off');
 
-                // 3. Επιλογή τυχαίας ιδέας
-                const randomIndex = Math.floor(Math.random() * availableIdeas.length);
-                const choice = availableIdeas[randomIndex];
-                currentIdeaIndex = savedIdeas.indexOf(choice);
+                const randomIndex = Math.floor(Math.random() * savedIdeas.length);
+                const choice = savedIdeas[randomIndex];
+                currentIdeaIndex = randomIndex;
                 
                 ideaText.innerText = choice;
 
-                // 4. Εμφάνιση συννεφάκι
                 setTimeout(() => {
                     cloud.classList.add('cloud-active');
                     document.getElementById('actionButtons').style.display = 'none';
                     document.getElementById('resultButtons').style.display = 'flex';
-                }, 300);
+                }, 400);
 
-            }, 1200);
+            }, 1000);
         }
 
         function doneIdea() {
             if (currentIdeaIndex > -1) {
                 savedIdeas.splice(currentIdeaIndex, 1);
                 localStorage.setItem('myIdeas', JSON.stringify(savedIdeas));
-                alert("Μπράβο! Η ιδέα αφαιρέθηκε από το βάζο.");
                 window.location.href = 'jar-view.html';
             }
         }
