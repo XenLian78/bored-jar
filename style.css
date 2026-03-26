@@ -200,14 +200,6 @@ body {
 .lid-off { animation: lidPop 0.6s forwards; }
 .cloud-active { animation: cloudShow 0.5s forwards; display: flex !important; }
 
-/* Περιορισμός του χαρακτήρα στην οθόνη add-idea */
-.bottom-char-img {
-    max-width: 75%;      /* Μειώνουμε το πλάτος για να χωράει άνετα */
-    max-height: 140px;   /* Περιορίζουμε το ύψος για να μην σπρώχνει την κάρτα */
-    width: auto;
-    margin: auto auto -25px auto; /* Το -25px την τραβάει προς τα κάτω για να "πατήσει" στην άκρη */
-    display: block;
-    object-fit: contain;
 }
 /* Διόρθωση για τον χαρακτήρα: τον κάνουμε να μην 'σπρώχνει' το layout */
 .bottom-char-img {
