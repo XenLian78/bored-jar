@@ -209,3 +209,19 @@ body {
     display: block;
     object-fit: contain;
 }
+/* Διόρθωση για τον χαρακτήρα στην οθόνη προσθήκης ιδέας */
+.bottom-char-img {
+    max-width: 80%;      /* Μειώνουμε το πλάτος για να χωράει */
+    max-height: 150px;   /* Περιορίζουμε το ύψος για να μην σπρώχνει την κάρτα */
+    width: auto;
+    margin: 0 auto -31px auto; /* Το -31px τον τραβάει στην άκρη του λευκού πλαισίου */
+    display: block;
+    object-fit: contain;
+}
+
+/* Σιγουρευόμαστε ότι η κάρτα δεν μεγαλώνει παραπάνω από το κινητό */
+.main-card {
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+}
