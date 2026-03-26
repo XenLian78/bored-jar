@@ -2,85 +2,36 @@
 <html lang="el">
 <head>
     <meta charset="UTF-8">
-    <title>Bored Jar - Το Βάζο μου</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bored Jar - Οι Ιδέες μου</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Περιορισμός της λίστας για να έχουμε scroll */
-        .idea-list-container {
-            width: 100%;
-            text-align: left;
-            margin-top: 15px;
-            flex-grow: 1;      /* Παίρνει τον διαθέσιμο χώρο */
-            overflow-y: auto;  /* Ενεργοποίηση scroll */
-            padding-right: 5px;
-            margin-bottom: 15px;
-        }
-
-        .idea-item {
-            display: flex;
-            align-items: center;
-            background: #f4f5f7;
-            margin-bottom: 8px;
-            padding: 12px;
-            border-radius: 12px;
-        }
-
-        .idea-item input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            margin-right: 12px;
-            accent-color: var(--brand-orange); /* Το checkbox γίνεται πορτοκαλί όταν πατηθεί */
-        }
-
-        .disabled-idea {
-            opacity: 0.4;
-        }
-        .disabled-idea span {
-            text-decoration: line-through;
-        }
-    </style>
 </head>
 <body>
 
     <div class="phone-container">
         <div class="top-nav">
-            <a href="add-idea.html">< Πίσω</a>
+            <a href="index.html" style="display: flex; align-items: center; gap: 5px;">
+                <span style="font-size: 20px;"><</span> Back
+            </a>
         </div>
 
-        <div class="main-card">
-            <h2 style="color: var(--dark-text); font-size: 22px; margin-bottom: 5px;">ΤΟ ΒΑΖΟ ΣΟΥ</h2>
-            <p style="color: #666; font-size: 14px; margin-bottom: 10px;">Επίλεξε τι θα παραμείνει μέσα:</p>
+        <header class="app-header-main">
+            <h1 class="main-title">The Learn Jar</h1>
+        </header>
 
-            <div id="jarList" class="idea-list-container">
-                <!-- Εδώ φορτώνουν οι ιδέες από το script -->
+        <div class="main-card jar-view-card">
+            <p class="card-subtitle" style="width: 100%; text-align: center; font-weight: 600;">
+                Click the desired activities
+            </p>
+
+            <div class="idea-list-container" id="ideaList">
+                </div>
+
+            <div class="jar-actions">
+                <button class="jar-btn-primary" onclick="alert('Ideas placed in jar!')">Place in jar</button>
+                <button class="jar-btn-secondary" onclick="alert('Starting game...')">Start the game</button>
             </div>
-
-            <button class="start-btn" onclick="window.location.href='random-draw.html'">ΕΝΑΡΞΗ ΠΑΙΧΝΙΔΙΟΥ</button>
         </div>
 
-        <footer style="text-align: center; padding: 15px;">
-            <img src="assets/images/logo-bored-jar.svg" style="width: 80px;" alt="Bored Jar Logo">
-        </footer>
-    </div>
-
-    <script>
-        const jarList = document.getElementById('jarList');
-        // Φορτώνουμε τις πραγματικές ιδέες από τη μνήμη
-        let savedIdeas = JSON.parse(localStorage.getItem('myIdeas')) || [];
-
-        if (savedIdeas.length === 0) {
-            jarList.innerHTML = "<p style='text-align:center; color:#999; margin-top:20px;'>Το βάζο είναι άδειο!</p>";
-        } else {
-            savedIdeas.forEach((idea) => {
-                const item = document.createElement('div');
-                item.className = 'idea-item';
-                item.innerHTML = `
-                    <input type="checkbox" checked onchange="this.parentElement.classList.toggle('disabled-idea')">
-                    <span class="idea-text">${idea}</span>
-                `;
-                jarList.appendChild(item);
-            });
-        }
-    </script>
-</body>
-</html>
+        <footer class="app-footer">
+            <div class="footer-content" style="display: flex; justify-content: center
