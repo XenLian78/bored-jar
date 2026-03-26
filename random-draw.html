@@ -5,56 +5,34 @@
     <title>Bored Jar - Κλήρωση!</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Διόρθωση περιοχής κλήρωσης για να μην κρύβεται το logo */
         .draw-area {
             position: relative;
             width: 100%;
-            flex-grow: 1; 
+            height: 350px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 300px;
+            align-items: flex-end;
+            margin-bottom: 20px;
         }
-
-        /* Ευθυγράμμιση βάζου και καπακιού */
-        .jar-wrapper { 
-            position: relative; 
-            width: 200px; 
-        }
-
-        #jarBody { 
-            width: 100%; 
-            display: block; 
-            position: relative;
-            z-index: 1;
-        }
-
+        .jar-wrapper { position: relative; width: 180px; }
         #jarLid {
             position: absolute;
-            width: 105%; 
-            top: -12px; /* Ρύθμιση για να εφάπτεται ακριβώς στο σώμα */
-            left: -2.5%; 
-            z-index: 2;
+            top: -40px; left: 0; width: 100%; z-index: 2;
             transition: all 0.3s;
         }
+        #jarBody { width: 100%; display: block; position: relative; z-index: 1; }
         
-        /* Ρυθμίσεις για το συννεφάκι */
         #cloudContainer {
             position: absolute;
             top: -60px;
             width: 280px;
             height: 200px;
-            display: none; 
+            display: none; /* Κρυφό αρχικά */
             justify-content: center;
             align-items: center;
             z-index: 3;
         }
-
-        #cloudImg { 
-            width: 100%; 
-            position: absolute; 
-        }
-
+        #cloudImg { width: 100%; position: absolute; }
         #selectedIdea {
             position: relative;
             z-index: 4;
@@ -64,14 +42,6 @@
             font-size: 18px;
             text-align: center;
             max-width: 80%;
-            word-wrap: break-word;
-        }
-
-        /* Εξασφάλιση ότι η κάρτα αφήνει χώρο για το footer */
-        .main-card {
-            justify-content: space-between;
-            padding-bottom: 20px;
-            overflow: visible; /* Για να φαίνεται το καπάκι όταν πετάγεται */
         }
     </style>
 </head>
@@ -81,7 +51,7 @@
             <a href="jar-view.html">< Πίσω</a>
         </div>
 
-        <div class="main-card">
+        <div class="main-card" style="justify-content: center;">
             <div class="draw-area">
                 <div id="cloudContainer">
                     <img src="assets/images/cloud-bubble.png" id="cloudImg">
@@ -94,28 +64,30 @@
                 </div>
             </div>
 
-            <div id="actionButtons" style="width: 100%; padding: 0 10px;">
+            <div id="actionButtons" style="width: 100%;">
                 <button class="start-btn btn-orange" onclick="drawIdea()">ΔΙΑΛΕΞΕ ΓΙΑ ΜΕΝΑ</button>
             </div>
             
-            <div id="resultButtons" style="width: 100%; display: none; flex-direction: column; gap: 12px; padding: 0 10px;">
-                <button class="start-btn" onclick="doneIdea()" style="background-color: #28a745; margin-top: 0;">
-                    ΤΟ ΕΚΑΝΑ!
-                </button>
-                <button class="start-btn" onclick="location.reload()" style="background-color: var(--btn-gray); margin-top: 0;">
-                    ΑΛΛΟ ΕΝΑ...
-                </button>
-            </div>
+            <div id="resultButtons" style="width: 100%; display: none; flex-direction: column; gap: 12px;">
+            <button class="start-btn" onclick="doneIdea()" style="background-color: #28a745; margin-top: 0;">
+                ΤΟ ΕΚΑΝΑ!
+            </button>
+            <button class="start-btn" onclick="location.reload()" style="background-color: var(--btn-gray); margin-top: 0;">
+                ΑΛΛΟ ΕΝΑ...
+            </button>
         </div>
 
-        <footer style="text-align: center; padding: 15px; flex-shrink: 0;">
-            <img src="assets/images/logo-bored-jar.svg" style="width: 80px;" alt="Logo">
+        <footer style="text-align: center; padding: 15px;">
+            <img src="assets/images/logo-bored-jar.svg" style="width: 80px;">
         </footer>
     </div>
 
     <script>
         let currentIdeaIndex = -1;
         let savedIdeas = JSON.parse(localStorage.getItem('myIdeas')) || [];
+        
+        // Φιλτράρουμε μόνο όσες ΔΕΝ είναι disabled (αν είχαμε σώσει το status)
+        // Για τώρα, ας πάρουμε όλες, αλλά μπορούμε να το εξελίξουμε
         let availableIdeas = [...savedIdeas]; 
 
         function drawIdea() {
@@ -129,7 +101,7 @@
             const cloud = document.getElementById('cloudContainer');
             const ideaText = document.getElementById('selectedIdea');
 
-            // 1. Ξεκινάει το κούνημα (πρέπει να υπάρχει η κλάση .shaking στο style.css)
+            // 1. Ξεκινάει το κούνημα
             jar.classList.add('shaking');
             
             setTimeout(() => {
