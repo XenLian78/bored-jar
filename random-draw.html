@@ -14,18 +14,12 @@
             align-items: flex-end;
             margin-bottom: 20px;
         }
-        .jar-wrapper { 
-    position: relative; 
-    width: 240px; /* Από 180px που ήταν */
-        }
+        .jar-wrapper { position: relative; width: 180px; }
         #jarLid {
             position: absolute;
-            top: -55px; /* Προσαρμογή ύψους για το μεγαλύτερο βάζο */
-            left: 0; 
-            width: 100%; 
-            z-index: 2;
+            top: -40px; left: 0; width: 100%; z-index: 2;
+            transition: all 0.3s;
         }
-
         #jarBody { width: 100%; display: block; position: relative; z-index: 1; }
         
         #cloudContainer {
