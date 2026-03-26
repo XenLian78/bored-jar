@@ -6,6 +6,7 @@
     --brand-orange: #FF941A;
     --btn-gray: #A3ABC0;
     --input-border: #E0E0E0;
+    --jar-green: #28a745; /* Πράσινο για τα checks */
 }
 
 * {
@@ -37,7 +38,7 @@ body {
     overflow: hidden;
 }
 
-/* --- 3. ΠΛΟΗΓΗΣΗ --- */
+/* --- 3. ΠΛΟΗΓΗΣΗ & HEADERS --- */
 .top-nav {
     padding: 40px 10px 10px 10px;
 }
@@ -53,6 +54,17 @@ body {
     font-size: 16px;
 }
 
+.app-header-main {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.main-title {
+    color: var(--dark-text);
+    font-size: 24px;
+    line-height: 1.2;
+}
+
 /* --- 4. Η ΚΑΡΤΑ (ΚΟΙΝΟ ΣΤΥΛ) --- */
 .main-card {
     background: var(--white-card);
@@ -63,17 +75,23 @@ body {
     align-items: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     position: relative;
+    overflow: hidden;
 }
 
-/* Ειδική ρύθμιση για την οθόνη add-idea ώστε να μην "ξεχειλίζει" */
 .add-idea-card {
-    height: 580px; /* Σταθερό ύψος για να μοιάζει με το προσχέδιο */
+    height: 580px;
     flex-grow: 0;
     margin-bottom: 10px;
 }
 
 .index-card {
-    flex-grow: 1; /* Μόνο η αρχική οθόνη τεντώνει μέχρι κάτω */
+    flex-grow: 1;
+}
+
+.jar-view-card {
+    flex-grow: 1;
+    margin-bottom: 20px;
+    align-items: flex-start; /* Ευθυγράμμιση λίστας αριστερά */
 }
 
 /* --- 5. ΚΟΥΜΠΙΑ & INPUT --- */
@@ -87,91 +105,4 @@ body {
     border-radius: 14px;
     cursor: pointer;
     transition: all 0.3s;
-    margin-bottom: 10px;
-}
-
-.btn-orange {
-    background-color: var(--brand-orange) !important;
-}
-
-.no-bold {
-    font-weight: 400 !important;
-}
-
-.custom-input {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid var(--input-border);
-    border-radius: 12px;
-    margin-bottom: 20px;
-    font-size: 16px;
-    outline: none;
-}
-
-/* --- 6. Ο ΧΑΡΑΚΤΗΡΑΣ (ΜΕΣΑ ΣΤΗΝ ΚΑΡΤΑ) --- */
-.char-container {
-    margin-top: auto; /* Σπρώχνει την εικόνα στο κάτω μέρος της κάρτας */
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.bottom-char-img {
-    max-width: 60%; /* Μίκρυνε η εικόνα για να μην βγαίνει έξω */
-    height: auto;
-    display: block;
-    object-fit: contain;
-}
-
-/* --- 7. ΛΟΙΠΑ ΣΤΟΙΧΕΙΑ INDEX --- */
-.categories-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.cat { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.cat img { width: 65px; height: auto; margin-bottom: 5px; }
-.cat p { font-size: 11px; color: var(--dark-text); font-weight: 800; }
-
-.card-title {
-    color: var(--dark-text);
-    font-size: 18px;
-    text-align: center;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-}
-
-.card-subtitle {
-    color: #666;
-    font-size: 13px;
-    margin-bottom: 20px;
-}
-
-/* --- 8. FOOTER --- */
-.app-footer {
-    text-align: center;
-    margin-top: auto;
-    padding-bottom: 20px;
-}
-
-.footer-logo {
-    width: 80px;
-}
-/* Κουμπί διαγραφής (X) */
-.delete-btn {
-    margin-left: auto; /* Σπρώχνει το X τέρμα δεξιά */
-    color: #ff4d4d;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 5px 10px;
-    font-size: 18px;
-    transition: transform 0.2s;
-}
-
-.delete-btn:hover {
-    transform: scale(1.2);
-}
+    margin-bottom: 10px
