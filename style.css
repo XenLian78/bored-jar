@@ -1,14 +1,18 @@
-/* --- 1. ΓΕΝΙΚΕΣ ΡΥΘΜΙΣΕΙΣ (ΔΕΝ ΑΛΛΑΖΟΥΝ) --- */
+/* --- 1. ΜΕΤΑΒΛΗΤΕΣ ΚΑΙ ΒΑΣΙΚΕΣ ΡΥΘΜΙΣΕΙΣ --- */
 :root {
     --bg-main: #A3ABC0;
     --white-card: #FFFFFF;
     --dark-text: #1D2D50;
+    --brand-primary: #FEDB7F;
     --brand-orange: #FF941A;
     --btn-gray: #A3ABC0;
-    --jar-green: #28a745;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     background-color: #2c2c2c;
@@ -19,6 +23,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* --- 2. ΤΟ ΠΛΑΙΣΙΟ ΤΟΥ ΚΙΝΗΤΟΥ --- */
 .phone-container {
     background-color: var(--bg-main);
     width: 375px;
@@ -27,139 +32,170 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 0 20px 20px 20px;
+    padding: 0 20px 20px 20px; /* 0 πάνω γιατί έχουμε το top-nav */
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
     overflow: hidden;
 }
 
-/* --- 2. ΚΟΙΝΑ ΣΤΟΙΧΕΙΑ ΚΑΡΤΑΣ --- */
+/* --- 3. ΠΛΟΗΓΗΣΗ ΚΑΙ ΚΑΡΤΑ --- */
+.top-nav {
+    text-align: left;
+    padding: 30px 20px 10px 10px;
+}
+
+.top-nav a {
+    text-decoration: none;
+    color: var(--dark-text);
+    font-weight: bold;
+    font-size: 18px;
+    transition: opacity 0.2s;
+}
+
 .main-card {
     background: var(--white-card);
     border-radius: 30px;
+    flex-grow: 1;
     padding: 25px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    overflow: hidden; /* Κρατάει τα πάντα μέσα στις στρογγυλεμένες γωνίες */
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
-/* --- 3. ΟΘΟΝΗ 1: ΑΡΧΙΚΗ (INDEX) --- */
-.index-card {
-    flex-grow: 1;
-    align-items: center;
-}
-
+/* --- 4. GRID ΚΑΤΗΓΟΡΙΩΝ (INDEX) --- */
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .cat {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; 
+    align-items: center;    
+    justify-content: center;
     text-align: center;
 }
 
-.cat img { width: 65px; height: auto; margin-bottom: 5px; }
-
-.cat p { 
-    font-size: 11px; 
-    color: var(--dark-text); 
-    font-weight: 800; /* Bold μόνο στις κατηγορίες */
-}
-
-/* --- 4. ΟΘΟΝΗ 2: ADD-IDEA --- */
-.add-idea-card {
-    height: 580px; /* Σταθερό ύψος για να μην ξεχειλώνει */
-    align-items: center;
-}
-
-.char-container {
-    margin-top: auto;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.bottom-char-img {
-    max-width: 60%;
+.cat img {
+    width: 70px; 
     height: auto;
+    margin-bottom: 5px;
+    transition: transform 0.2s; 
 }
 
-/* --- 5. ΟΘΟΝΗ 3: JAR-VIEW (ΠΡΑΣΙΝΑ ΚΟΥΜΠΙΑ) --- */
-.jar-view-card {
+.cat p {
+    font-size: 11px;
+    color: var(--dark-text);
+    font-weight: 700;
+}
+
+.cat:hover img { transform: scale(1.1); }
+
+/* --- 5. ΚΟΥΜΠΙΑ --- */
+.start-btn {
+    background-color: var(--btn-gray);
+    color: #FFFFFF;
+    border: none;
+    width: 100%;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    flex-shrink: 0; /* Εμποδίζει το κουμπί να "μαζέψει" σε ύψος */
+}
+
+.btn-orange {
+    background-color: var(--brand-orange) !important;
+    color: white !important;
+}
+
+.start-btn:hover {
+    filter: brightness(0.9);
+    transform: translateY(-2px);
+}
+
+/* --- 6. ΛΙΣΤΑ ΙΔΕΩΝ (JAR VIEW) --- */
+.idea-list-container {
+    width: 100%;
+    text-align: left;
+    margin-top: 15px;
     flex-grow: 1;
-    margin-bottom: 20px;
+    overflow-y: auto;
+    padding-right: 5px;
+    margin-bottom: 15px;
 }
 
 .idea-item {
     display: flex;
     align-items: center;
-    width: 100%;
+    background: #f4f5f7;
     margin-bottom: 8px;
+    padding: 10px 12px; /* Λίγο πιο compact */
+    border-radius: 12px;
 }
 
 .idea-item input[type="checkbox"] {
-    accent-color: var(--jar-green); /* Πράσινο checkbox */
-    width: 18px;
+    width: 18px;             /* Μικρότερο μέγεθος */
     height: 18px;
-    margin-right: 10px;
-}
-
-.delete-btn {
-    margin-left: auto;
-    color: #ff4d4d;
+    margin-right: 12px;
+    accent-color: #28a745;   /* Κλασικό πράσινο χρώμα */
     cursor: pointer;
-    font-weight: bold;
-    padding: 0 5px;
 }
 
-.jar-actions {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    width: 100%;
-}
-
-.jar-btn-primary {
-    background-color: var(--btn-gray);
-    color: white;
-    border: none;
-    padding: 14px;
-    border-radius: 12px;
-    width: 200px;
-}
-
-.jar-btn-secondary {
-    background-color: white;
+.idea-text {
+    font-size: 15px;         /* Πιο κομψό κείμενο */
     color: var(--dark-text);
-    border: 1px solid #ddd;
-    padding: 14px;
-    border-radius: 12px;
-    width: 200px;
 }
 
-/* --- 6. ΚΟΥΜΠΙΑ ΓΕΝΙΚΑ --- */
-.no-bold {
-    font-weight: 400 !important; /* Αφαίρεση bold από το ΞΕΚΙΝΑΜΕ */
+.disabled-idea {
+    opacity: 0.4;
 }
 
-.start-btn {
-    background-color: var(--btn-gray);
-    color: white;
-    border: none;
-    width: 100%;
-    padding: 16px;
-    border-radius: 14px;
+.disabled-idea .idea-text {
+    text-decoration: line-through;
+}
+/* Κουμπί διαγραφής (X) */
+.delete-btn {
+    margin-left: auto; /* Σπρώχνει το X τέρμα δεξιά */
+    color: #ff4d4d;
+    font-weight: bold;
     cursor: pointer;
+    padding: 5px 10px;
+    font-size: 18px;
+    transition: transform 0.2s;
 }
 
-.btn-orange { background-color: var(--brand-orange) !important; }
+.delete-btn:hover {
+    transform: scale(1.2);
+}
+/* Animations για την κλήρωση */
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    20% { transform: translate(-3px, 0px) rotate(-1deg); }
+    40% { transform: translate(3px, 2px) rotate(1deg); }
+    60% { transform: translate(-3px, 1px) rotate(-1deg); }
+    80% { transform: translate(3px, 1px) rotate(1deg); }
+    100% { transform: translate(1px, -2px) rotate(0deg); }
+}
 
-/* --- 7. FOOTER & NAV --- */
-.app-footer { text-align: center; margin-top: auto; padding-bottom: 20px; }
-.footer-logo { width: 80px; }
-.top-nav { padding: 40px 10px 10px 10px; }
+@keyframes lidPop {
+    0% { transform: translateY(0) rotate(0); opacity: 1; }
+    100% { transform: translateY(-100px) rotate(20deg); opacity: 0; }
+}
+
+@keyframes cloudShow {
+    0% { transform: scale(0); opacity: 0; }
+    70% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.shaking { animation: shake 0.5s infinite; }
+.lid-off { animation: lidPop 0.6s forwards; }
+.cloud-active { animation: cloudShow 0.5s forwards; display: flex !important; }
