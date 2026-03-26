@@ -2,36 +2,69 @@
 <html lang="el">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bored Jar - Οι Ιδέες μου</title>
+    <title>Bored Jar - Το Βάζο μου</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="phone-container">
         <div class="top-nav">
-            <a href="index.html" style="display: flex; align-items: center; gap: 5px;">
-                <span style="font-size: 20px;"><</span> Back
-            </a>
+            <a href="add-idea.html">< Πίσω</a>
         </div>
 
-        <header class="app-header-main">
-            <h1 class="main-title">The Learn Jar</h1>
-        </header>
+        <div class="main-card">
+            <h2 style="color: var(--dark-text); font-size: 22px; margin-bottom: 5px;">ΤΟ ΒΑΖΟ ΣΟΥ</h2>
+            <p style="color: #666; font-size: 14px; margin-bottom: 10px;">Διαχείριση ιδεών:</p>
 
-        <div class="main-card jar-view-card">
-            <p class="card-subtitle" style="width: 100%; text-align: center; font-weight: 600;">
-                Click the desired activities
-            </p>
-
-            <div class="idea-list-container" id="ideaList">
+            <div id="jarList" class="idea-list-container">
                 </div>
 
-            <div class="jar-actions">
-                <button class="jar-btn-primary" onclick="alert('Ideas placed in jar!')">Place in jar</button>
-                <button class="jar-btn-secondary" onclick="alert('Starting game...')">Start the game</button>
-            </div>
+            <button class="start-btn" onclick="window.location.href='random-draw.html'">ΕΝΑΡΞΗ ΠΑΙΧΝΙΔΙΟΥ</button>
         </div>
 
-        <footer class="app-footer">
-            <div class="footer-content" style="display: flex; justify-content: center
+        <footer style="text-align: center; padding: 15px;">
+            <img src="assets/images/logo-bored-jar.svg" style="width: 80px;" alt="Bored Jar Logo">
+        </footer>
+    </div>
+
+    <script>
+        const jarList = document.getElementById('jarList');
+        
+        // Φόρτωση από το LocalStorage
+        let savedIdeas = JSON.parse(localStorage.getItem('myIdeas')) || [];
+
+        function displayIdeas() {
+            jarList.innerHTML = ""; 
+
+            if (savedIdeas.length === 0) {
+                jarList.innerHTML = "<p style='text-align:center; color:#999; margin-top:20px;'>Το βάζο είναι άδειο!</p>";
+            } else {
+                savedIdeas.forEach((idea, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'idea-item';
+                    item.innerHTML = `
+                        <input type="checkbox" checked onchange="this.parentElement.classList.toggle('disabled-idea')">
+                        <span class="idea-text">${idea}</span>
+                        <span class="delete-btn" onclick="deleteIdea(${index})">×</span>
+                    `;
+                    jarList.appendChild(item);
+                });
+            }
+        }
+
+        // Λειτουργία οριστικής διαγραφής
+        function deleteIdea(index) {
+            if (confirm("Θέλεις σίγουρα να διαγράψεις αυτή την ιδέα;")) {
+                // Αφαίρεση από τον πίνακα
+                savedIdeas.splice(index, 1);
+                // Ενημέρωση της μνήμης (LocalStorage)
+                localStorage.setItem('myIdeas', JSON.stringify(savedIdeas));
+                // Επανασχεδιασμός της λίστας
+                displayIdeas();
+            }
+        }
+
+        displayIdeas();
+    </script>
+</body>
+</html>
