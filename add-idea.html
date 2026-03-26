@@ -9,31 +9,38 @@
 
     <div class="phone-container">
         
-        <div class="top-nav nav-right">
-            <a href="jar-view.html">Παράλειψη ></a>
-        </div>
+<div class="top-nav" style="text-align: right;">
+    <a href="jar-view.html">Παράλειψη ></a>
+</div>
 
-        <div class="main-card add-idea-card">
-            <h2 class="card-title">
+        
+<div class="main-card" style="text-align: center; margin-bottom: 20px;">
+            <h2 style="color: var(--dark-text); font-size: 20px; margin-bottom: 10px; text-transform: uppercase;">
                 ΓΡΑΨΕ ΜΙΑ ΙΔΕΑ ΚΑΙ<br>ΤΟΠΟΘΕΤΗΣΕ ΤΗΝ ΣΤΟ ΒΑΖΟ
             </h2>
-            <p class="card-subtitle">Επανέλαβε για περισσότερες ιδέες</p>
+            <p style="color: #666; font-size: 14px; margin-bottom: 25px;">Επανέλαβε για περισσότερες ιδέες</p>
 
-            <input type="text" id="ideaInput" placeholder="Γράψε μια ιδέα..." class="custom-input">
+            
+<input type="text" id="ideaInput" placeholder="Γράψε μια ιδέα..." 
+                   style="width: 100%; padding: 15px; border: 2px solid #E0E0E0; border-radius: 15px; margin-bottom: 20px; font-size: 16px;">
 
-            <button class="start-btn no-bold" id="addBtn">Βάλε την ιδέα στο βάζο</button>
+            
+<button class="start-btn" id="addBtn" style="margin-top: 0;">Βάλε την ιδέα στο βάζο</button>
 
-            <button class="start-btn btn-orange no-bold" onclick="window.location.href='jar-view.html'">
+            
+<button class="start-btn btn-orange" 
+                    onclick="window.location.href='jar-view.html'" 
+                    style="margin-top: 15px;">
                 Δες το βάζο σου
             </button>
 
-            <div class="char-container">
-                <img src="assets/images/idea-man.png" class="bottom-char-img" alt="Idea Character">
-            </div>
+            
+<img src="assets/images/idea-man.png" class="bottom-char-img" alt="Idea Character">
         </div>
 
-        <footer class="app-footer">
-            <img src="assets/images/logo-bored-jar.svg" class="footer-logo" alt="Bored Jar Logo">
+        
+<footer style="text-align: center; padding: 10px 15px 25px 15px; margin-top: auto;">
+            <img src="assets/images/logo-bored-jar.svg" style="width: 80px;" alt="Bored Jar Logo">
         </footer>
     </div>
 
@@ -43,12 +50,16 @@
 
         btn.addEventListener('click', () => {
             const newIdea = input.value.trim();
+            
             if (newIdea !== "") {
                 let savedIdeas = JSON.parse(localStorage.getItem('myIdeas')) || [];
                 savedIdeas.push(newIdea);
                 localStorage.setItem('myIdeas', JSON.stringify(savedIdeas));
-                alert("Η ιδέα προστέθηκε!");
+                
+                alert("Η ιδέα '" + newIdea + "' μπήκε στο βάζο!");
                 input.value = "";
+            } else {
+                alert("Γράψε κάτι πρώτα!");
             }
         });
     </script>
