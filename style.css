@@ -37,13 +37,25 @@ body {
     overflow: hidden;
 }
 
-/* --- 3. ΠΛΟΗΓΗΣΗ --- */
+/* --- 3. ΠΛΟΗΓΗΣΗ & HEADER --- */
+.app-header-main {
+    text-align: center;
+    margin-top: 35px;
+    margin-bottom: 10px;
+}
+
+.main-title {
+    color: var(--dark-text);
+    font-size: 24px;
+    line-height: 1.2;
+}
+
 .top-nav {
     padding: 30px 10px 10px 10px;
 }
 
 .nav-right {
-    text-align: right; /* Σπρώχνει το κείμενο δεξιά */
+    text-align: right;
 }
 
 .top-nav a {
@@ -57,7 +69,7 @@ body {
 .main-card {
     background: var(--white-card);
     border-radius: 30px;
-    flex-grow: 1; /* Γεμίζει το ύψος */
+    flex-grow: 1;
     padding: 25px;
     display: flex;
     flex-direction: column;
@@ -67,44 +79,25 @@ body {
     position: relative;
 }
 
-.card-title {
-    color: var(--dark-text);
-    font-size: 19px;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-.card-subtitle {
-    color: #666;
-    font-size: 13px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-/* --- 5. ΦΟΡΜΕΣ ΚΑΙ ΚΟΥΜΠΙΑ --- */
-.custom-input {
-    width: 100%;
-    padding: 14px;
-    border: 2px solid var(--input-border);
-    border-radius: 12px;
-    margin-bottom: 15px;
-    font-size: 16px;
-    outline: none;
-}
-
+/* --- 5. ΚΟΥΜΠΙΑ --- */
 .start-btn {
     background-color: var(--btn-gray);
     color: #FFFFFF;
     border: none;
     width: 100%;
-    padding: 16px;
-    font-size: 17px;
-    font-weight: 600;
-    border-radius: 14px;
+    padding: 18px;
+    font-size: 18px;
+    font-weight: 800;
+    border-radius: 16px;
     cursor: pointer;
     transition: all 0.3s;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-transform: uppercase;
+}
+
+/* Διόρθωση: Σπρώχνει το κουμπί στο κάτω μέρος της κάρτας */
+.btn-bottom {
+    margin-top: auto; 
 }
 
 .btn-orange {
@@ -112,32 +105,13 @@ body {
     margin-top: 12px;
 }
 
-/* --- 6. Ο ΧΑΡΑΚΤΗΡΑΣ (ΠΕΡΙΟΡΙΣΜΟΣ ΕΝΤΟΣ ΚΑΡΤΑΣ) --- */
-.bottom-char-img {
-    max-width: 50%; /* Μίκρυνε για να μείνει εντός πλαισίου */
-    max-height: 120px;
-    width: auto;
-    margin: auto auto 0 auto; /* Κάθεται στη βάση της κάρτας */
-    display: block;
-    object-fit: contain;
-}
-
-/* --- 7. FOOTER --- */
-.app-footer {
-    text-align: center;
-    padding: 15px;
-}
-
-.footer-logo {
-    width: 80px;
-}
-
-/* --- 8. GRID & ΛΙΣΤΕΣ (ΓΙΑ ΑΛΛΕΣ ΟΘΟΝΕΣ) --- */
+/* --- 6. INDEX ΣΤΟΙΧΕΙΑ --- */
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .cat {
@@ -148,20 +122,54 @@ body {
 }
 
 .cat img { width: 65px; height: auto; margin-bottom: 5px; }
+.cat p { font-size: 11px; color: var(--dark-text); font-weight: 700; }
 
-.idea-list-container {
+.hero-image-container {
     width: 100%;
-    flex-grow: 1;
-    overflow-y: auto;
+    margin-top: 10px;
 }
 
-.idea-item {
-    display: flex;
-    align-items: center;
-    background: #f4f5f7;
+.hero-img {
+    width: 100%;
+    display: block;
+}
+
+/* --- 7. ADD IDEA ΣΤΟΙΧΕΙΑ --- */
+.card-title {
+    color: var(--dark-text);
+    font-size: 19px;
     margin-bottom: 8px;
-    padding: 10px;
-    border-radius: 10px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.custom-input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid var(--input-border);
+    border-radius: 12px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    outline: none;
+}
+
+.bottom-char-img {
+    max-width: 50%;
+    max-height: 120px;
+    width: auto;
+    margin: 20px auto 0 auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* --- 8. FOOTER --- */
+.app-footer {
+    text-align: center;
+    padding: 15px;
+}
+
+.footer-logo {
+    width: 80px;
 }
 
 /* --- 9. ANIMATIONS --- */
