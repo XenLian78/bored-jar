@@ -43,7 +43,7 @@ body {
 }
 
 .nav-right {
-    text-align: right; /* Σπρώχνει το "Παράλειψη" δεξιά */
+    text-align: right; /* Σπρώχνει το κείμενο δεξιά */
 }
 
 .top-nav a {
@@ -51,14 +51,13 @@ body {
     color: var(--dark-text);
     font-weight: bold;
     font-size: 16px;
-    transition: opacity 0.2s;
 }
 
 /* --- 4. Η ΚΑΡΤΑ --- */
 .main-card {
     background: var(--white-card);
     border-radius: 30px;
-    flex-grow: 1;
+    flex-grow: 1; /* Γεμίζει το ύψος */
     padding: 25px;
     display: flex;
     flex-direction: column;
@@ -68,30 +67,28 @@ body {
     position: relative;
 }
 
-.add-idea-card {
-    text-align: center;
-}
-
 .card-title {
     color: var(--dark-text);
-    font-size: 20px;
-    margin-bottom: 10px;
+    font-size: 19px;
+    margin-bottom: 8px;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .card-subtitle {
     color: #666;
-    font-size: 14px;
-    margin-bottom: 25px;
+    font-size: 13px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 /* --- 5. ΦΟΡΜΕΣ ΚΑΙ ΚΟΥΜΠΙΑ --- */
 .custom-input {
     width: 100%;
-    padding: 15px;
+    padding: 14px;
     border: 2px solid var(--input-border);
-    border-radius: 15px;
-    margin-bottom: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
     font-size: 16px;
     outline: none;
 }
@@ -102,74 +99,60 @@ body {
     border: none;
     width: 100%;
     padding: 16px;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
-    border-radius: 15px;
+    border-radius: 14px;
     cursor: pointer;
     transition: all 0.3s;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    flex-shrink: 0;
 }
 
 .btn-orange {
     background-color: var(--brand-orange) !important;
-    margin-top: 15px;
-}
-
-.start-btn:hover {
-    filter: brightness(0.9);
-    transform: translateY(-2px);
+    margin-top: 12px;
 }
 
 /* --- 6. Ο ΧΑΡΑΚΤΗΡΑΣ (ΠΕΡΙΟΡΙΣΜΟΣ ΕΝΤΟΣ ΚΑΡΤΑΣ) --- */
 .bottom-char-img {
-    max-width: 55%; /* Μίκρυνε για να χωράει άνετα */
-    max-height: 130px;
+    max-width: 50%; /* Μίκρυνε για να μείνει εντός πλαισίου */
+    max-height: 120px;
     width: auto;
-    margin: auto auto -10px auto; /* Το κρατάμε μέσα στο λευκό */
+    margin: auto auto 0 auto; /* Κάθεται στη βάση της κάρτας */
     display: block;
     object-fit: contain;
-    flex-shrink: 0;
 }
 
 /* --- 7. FOOTER --- */
 .app-footer {
     text-align: center;
     padding: 15px;
-    margin-top: auto;
 }
 
 .footer-logo {
     width: 80px;
 }
 
-/* --- 8. ΕΠΙΠΛΕΟΝ ΣΤΟΙΧΕΙΑ (GRID & LIST) --- */
+/* --- 8. GRID & ΛΙΣΤΕΣ (ΓΙΑ ΑΛΛΕΣ ΟΘΟΝΕΣ) --- */
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     width: 100%;
-    margin-bottom: 20px;
 }
 
 .cat {
     display: flex;
     flex-direction: column; 
     align-items: center;    
-    justify-content: center;
     text-align: center;
 }
 
-.cat img { width: 70px; height: auto; margin-bottom: 5px; }
-.cat p { font-size: 11px; color: var(--dark-text); font-weight: 700; }
+.cat img { width: 65px; height: auto; margin-bottom: 5px; }
 
 .idea-list-container {
     width: 100%;
-    text-align: left;
-    margin-top: 15px;
     flex-grow: 1;
     overflow-y: auto;
-    margin-bottom: 15px;
 }
 
 .idea-item {
@@ -177,36 +160,14 @@ body {
     align-items: center;
     background: #f4f5f7;
     margin-bottom: 8px;
-    padding: 10px 12px;
-    border-radius: 12px;
+    padding: 10px;
+    border-radius: 10px;
 }
 
-.delete-btn {
-    margin-left: auto;
-    color: #ff4d4d;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-/* --- 9. ANIMATIONS ΚΛΗΡΩΣΗΣ --- */
+/* --- 9. ANIMATIONS --- */
 @keyframes shake {
     0% { transform: translate(1px, 1px) rotate(0deg); }
-    20% { transform: translate(-3px, 0px) rotate(-1deg); }
-    40% { transform: translate(3px, 2px) rotate(1deg); }
-    100% { transform: translate(1px, -2px) rotate(0deg); }
+    50% { transform: translate(-2px, -1px) rotate(-1deg); }
+    100% { transform: translate(0px, 0px) rotate(0deg); }
 }
-
-@keyframes lidPop {
-    0% { transform: translateY(0) rotate(0); opacity: 1; }
-    100% { transform: translateY(-100px) rotate(20deg); opacity: 0; }
-}
-
-@keyframes cloudShow {
-    0% { transform: scale(0); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
 .shaking { animation: shake 0.5s infinite; }
-.lid-off { animation: lidPop 0.6s forwards; }
-.cloud-active { animation: cloudShow 0.5s forwards; display: flex !important; }
