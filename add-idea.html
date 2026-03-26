@@ -21,13 +21,15 @@
 
             <input type="text" id="ideaInput" placeholder="Γράψε μια ιδέα..." class="custom-input">
 
-            <button class="start-btn" id="addBtn">Βάλε την ιδέα στο βάζο</button>
+            <button class="start-btn no-bold" id="addBtn">Βάλε την ιδέα στο βάζο</button>
 
-            <button class="start-btn btn-orange" onclick="window.location.href='jar-view.html'">
+            <button class="start-btn btn-orange no-bold" onclick="window.location.href='jar-view.html'">
                 Δες το βάζο σου
             </button>
 
-            <img src="assets/images/idea-man.png" class="bottom-char-img" alt="Idea Character">
+            <div class="char-container">
+                <img src="assets/images/idea-man.png" class="bottom-char-img" alt="Idea Character">
+            </div>
         </div>
 
         <footer class="app-footer">
@@ -41,16 +43,12 @@
 
         btn.addEventListener('click', () => {
             const newIdea = input.value.trim();
-            
             if (newIdea !== "") {
                 let savedIdeas = JSON.parse(localStorage.getItem('myIdeas')) || [];
                 savedIdeas.push(newIdea);
                 localStorage.setItem('myIdeas', JSON.stringify(savedIdeas));
-                
-                alert("Η ιδέα '" + newIdea + "' μπήκε στο βάζο!");
+                alert("Η ιδέα προστέθηκε!");
                 input.value = "";
-            } else {
-                alert("Γράψε κάτι πρώτα!");
             }
         });
     </script>
