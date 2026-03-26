@@ -4,6 +4,41 @@
     <meta charset="UTF-8">
     <title>Bored Jar - Το Βάζο μου</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Περιορισμός της λίστας για να έχουμε scroll */
+        .idea-list-container {
+            width: 100%;
+            text-align: left;
+            margin-top: 15px;
+            flex-grow: 1;      /* Παίρνει τον διαθέσιμο χώρο */
+            overflow-y: auto;  /* Ενεργοποίηση scroll */
+            padding-right: 5px;
+            margin-bottom: 15px;
+        }
+
+        .idea-item {
+            display: flex;
+            align-items: center;
+            background: #f4f5f7;
+            margin-bottom: 8px;
+            padding: 12px;
+            border-radius: 12px;
+        }
+
+        .idea-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            accent-color: var(--brand-orange); /* Το checkbox γίνεται πορτοκαλί όταν πατηθεί */
+        }
+
+        .disabled-idea {
+            opacity: 0.4;
+        }
+        .disabled-idea span {
+            text-decoration: line-through;
+        }
+    </style>
 </head>
 <body>
 
@@ -14,10 +49,11 @@
 
         <div class="main-card">
             <h2 style="color: var(--dark-text); font-size: 22px; margin-bottom: 5px;">ΤΟ ΒΑΖΟ ΣΟΥ</h2>
-            <p style="color: #666; font-size: 14px; margin-bottom: 10px;">Διαχείριση ιδεών:</p>
+            <p style="color: #666; font-size: 14px; margin-bottom: 10px;">Επίλεξε τι θα παραμείνει μέσα:</p>
 
             <div id="jarList" class="idea-list-container">
-                </div>
+                <!-- Εδώ φορτώνουν οι ιδέες από το script -->
+            </div>
 
             <button class="start-btn" onclick="window.location.href='random-draw.html'">ΕΝΑΡΞΗ ΠΑΙΧΝΙΔΙΟΥ</button>
         </div>
@@ -29,42 +65,22 @@
 
     <script>
         const jarList = document.getElementById('jarList');
-        
-        // Φόρτωση από το LocalStorage
+        // Φορτώνουμε τις πραγματικές ιδέες από τη μνήμη
         let savedIdeas = JSON.parse(localStorage.getItem('myIdeas')) || [];
 
-        function displayIdeas() {
-            jarList.innerHTML = ""; 
-
-            if (savedIdeas.length === 0) {
-                jarList.innerHTML = "<p style='text-align:center; color:#999; margin-top:20px;'>Το βάζο είναι άδειο!</p>";
-            } else {
-                savedIdeas.forEach((idea, index) => {
-                    const item = document.createElement('div');
-                    item.className = 'idea-item';
-                    item.innerHTML = `
-                        <input type="checkbox" checked onchange="this.parentElement.classList.toggle('disabled-idea')">
-                        <span class="idea-text">${idea}</span>
-                        <span class="delete-btn" onclick="deleteIdea(${index})">×</span>
-                    `;
-                    jarList.appendChild(item);
-                });
-            }
+        if (savedIdeas.length === 0) {
+            jarList.innerHTML = "<p style='text-align:center; color:#999; margin-top:20px;'>Το βάζο είναι άδειο!</p>";
+        } else {
+            savedIdeas.forEach((idea) => {
+                const item = document.createElement('div');
+                item.className = 'idea-item';
+                item.innerHTML = `
+                    <input type="checkbox" checked onchange="this.parentElement.classList.toggle('disabled-idea')">
+                    <span class="idea-text">${idea}</span>
+                `;
+                jarList.appendChild(item);
+            });
         }
-
-        // Λειτουργία οριστικής διαγραφής
-        function deleteIdea(index) {
-            if (confirm("Θέλεις σίγουρα να διαγράψεις αυτή την ιδέα;")) {
-                // Αφαίρεση από τον πίνακα
-                savedIdeas.splice(index, 1);
-                // Ενημέρωση της μνήμης (LocalStorage)
-                localStorage.setItem('myIdeas', JSON.stringify(savedIdeas));
-                // Επανασχεδιασμός της λίστας
-                displayIdeas();
-            }
-        }
-
-        displayIdeas();
     </script>
 </body>
 </html>
