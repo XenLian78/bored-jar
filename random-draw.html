@@ -68,10 +68,13 @@
                 <button class="start-btn btn-orange" onclick="drawIdea()">ΔΙΑΛΕΞΕ ΓΙΑ ΜΕΝΑ</button>
             </div>
             
-            <div id="resultButtons" style="width: 100%; display: none; gap: 10px;">
-                <button class="start-btn" onclick="doneIdea()" style="background-color: #28a745;">ΤΟ ΕΚΑΝΑ!</button>
-                <button class="start-btn" onclick="location.reload()" style="background-color: var(--btn-gray);">ΑΛΛΟ ΕΝΑ...</button>
-            </div>
+            <div id="resultButtons" style="width: 100%; display: none; flex-direction: column; gap: 12px;">
+            <button class="start-btn" onclick="doneIdea()" style="background-color: #28a745; margin-top: 0;">
+                ΤΟ ΕΚΑΝΑ!
+            </button>
+            <button class="start-btn" onclick="location.reload()" style="background-color: var(--btn-gray); margin-top: 0;">
+                ΑΛΛΟ ΕΝΑ...
+            </button>
         </div>
 
         <footer style="text-align: center; padding: 15px;">
